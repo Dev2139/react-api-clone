@@ -74,10 +74,9 @@ function Api1() {
   }, [selectedCategory]);
 
   return (
-    <div className="flex bg-gray-50 min-h-screen">
-      {/* Sidebar for Categories */}
-      <div className="w-1/4 bg-blue-100 p-6 shadow-md">
-        <h2 className="text-xl font-bold text-blue-700 mb-6">Meal Categories</h2>
+    <div className="flex bg-blue-400 rounded-lg min-h-screen">
+      <div className="w-1/4 bg-blue-600 rounded-lg p-8 shadow-lg">
+        <h2 className="text-4xl font-bold text-black mb-6">Meal Categories</h2>
         <div>
           {categories.map((category) => (
             <div key={category.idCategory} className="mb-4">
@@ -96,11 +95,9 @@ function Api1() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="w-3/4 p-8">
         <h1 className="text-3xl font-extrabold text-blue-700 mb-8">Find Your Favorite Meal</h1>
 
-        {/* Search Meal */}
         <div className="mb-6 flex items-center">
           <input
             type="text"
@@ -111,15 +108,14 @@ function Api1() {
           />
           <button
             onClick={fetchMeal}
-            className="ml-4 bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700"
+            className="ml-4 bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700"
           >
             Search
           </button>
         </div>
 
-        {/* Display Meal Details */}
         {meal && (
-          <div className="mt-6 p-6 bg-white rounded-lg shadow">
+          <div className="mt-6 p-6 bg-white rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-gray-800">{meal.strMeal}</h2>
             <img
               src={meal.strMealThumb}
@@ -130,7 +126,10 @@ function Api1() {
               <strong>Category:</strong> {meal.strCategory}
             </p>
             <p className="text-gray-700">
-              <strong>Cuisine:</strong> {meal.strArea}
+              <strong>Area:</strong> {meal.strArea}
+            </p>
+            <p className="text-gray-700">
+              <strong>Meal id:</strong> {meal.idMeal}
             </p>
             <p className="text-gray-700 mt-4">
               <strong>Instructions:</strong> {meal.strInstructions}
@@ -140,7 +139,7 @@ function Api1() {
                 href={meal.strYoutube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700"
+                className="inline-block mt-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700"
               >
                 Watch on YouTube
               </a>
@@ -148,31 +147,42 @@ function Api1() {
           </div>
         )}
 
-        {/* Error Messages */}
         {error && <p className="text-red-600 font-semibold mt-4">{error}</p>}
 
-        {/* Random Meal Generator */}
         <div className="mt-10">
           <button
             onClick={fetchRandomMeal}
-            className="bg-green-500 text-white px-6 py-2 rounded-lg shadow hover:bg-green-600"
+            className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-green-600"
           >
             Get Random Meal
           </button>
           {randomMeal && (
-            <div className="mt-6 p-6 bg-white rounded-lg shadow">
+            <div className="mt-6 p-6 bg-white rounded-lg shadow-lg">
               <h2 className="text-2xl font-semibold text-gray-800">{randomMeal.strMeal}</h2>
               <img
                 src={randomMeal.strMealThumb}
                 alt={randomMeal.strMeal}
                 className="w-64 h-64 object-cover rounded my-4 mx-auto"
               />
+              <p className="text-gray-700 mt-4">
+                <strong>Category:</strong> {randomMeal.strCategory}
+              </p>
+              <p className="text-gray-700 mt-4">
+                <strong>Meal Id:</strong> {randomMeal.idMeal}
+              </p>
+              <p className="text-gray-700 mt-4">
+                <strong>Area:</strong> {randomMeal.strArea}
+              </p>
+              <p className="text-gray-700 mt-4">
+                <strong>Instructions:</strong> {randomMeal.strInstructions}
+              </p>
+
               {randomMeal.strYoutube && (
                 <a
                   href={randomMeal.strYoutube}
-                  target="_blank"
+                  target="_top"
                   rel="noopener noreferrer"
-                  className="inline-block mt-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700"
+                  className="inline-block mt-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700"
                 >
                   Watch on YouTube
                 </a>
@@ -181,23 +191,19 @@ function Api1() {
           )}
         </div>
 
-       
         <div className="mt-10">
-          
           <div className="grid grid-cols-2 gap-6">
             {categoryMeals.map((meal) => (
               <div
                 key={meal.idMeal}
-                className="p-4 bg-white rounded-lg shadow flex flex-col items-center"
+                className="p-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
               >
                 <img
                   src={meal.strMealThumb}
                   alt={meal.strMeal}
                   className="w-40 h-40 object-cover rounded"
                 />
-                <p className="mt-2 text-gray-800 font-medium text-center">
-                  {meal.strMeal}
-                </p>
+                <p className="mt-2 text-black font-bold text-center">{meal.strMeal}</p>
               </div>
             ))}
           </div>
